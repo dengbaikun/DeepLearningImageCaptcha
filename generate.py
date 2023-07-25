@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+import multiprocessing
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from multiprocessing import Process
@@ -32,6 +33,8 @@ def get_uuid():
 
 
 def gen_image(gen_path, gen_count):
+    # gen_path=gen_params[0]
+    # gen_count=gen_params[1]
     for i in range(gen_count):
         # now = str(int(time.time()))
         text, image = generate_captcha_text_and_image()
@@ -42,17 +45,16 @@ def gen_image(gen_path, gen_count):
 
 if __name__ == '__main__':
 
-    count = 1000000
+    count = 1000
     path = setting.TRAIN_DATASET_PATH
     if not os.path.exists(path):
         os.makedirs(path)
     thread = []
     future_count = 100
     l_count = int(count / future_count)
-    for j in range(future_count):
-        p = Process(target=gen_image, args=(path, l_count,))
-        p.start()
-        thread.append(p)
-    for p in thread:
-        p.join()
+    pool = multiprocessing.Pool()
+    gen_params = [(path, l_count) for i in range(future_count)]
+    pool.starmap(gen_image, gen_params)
+    pool.close()
+    pool.join()
     # print('saved %d : %s' % (i + 1, filename))
