@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import torch
 import torch.nn as nn
+from matplotlib import pyplot as plt
 from torch.autograd import Variable
 import dataset
 from model import CNN
@@ -20,7 +21,12 @@ def main():
     max_eval_acc = -1
 
     train_dataloader = dataset.get_train_data_loader()
+    epoch_list = []
+    loss_list = []
+    plt.ion()
     for epoch in range(num_epochs):
+        if epoch == 0:
+            plt.pause(10)  # 启动时间，方便截屏
         for i, (images, labels) in enumerate(train_dataloader):
             images = images.cuda()
             labels = labels.cuda()
@@ -37,6 +43,13 @@ def main():
                 # current is model.pkl
                 torch.save(cnn.state_dict(), "./model.pkl")
                 print("save model")
+        epoch_list.append(epoch)
+        loss_list.append(loss.item())
+        plt.title("loss")
+        plt.plot(epoch_list, loss_list)
+        plt.xlabel("epoch")
+        plt.ylabel("loss")
+        plt.pause(0.5)
         print("epoch:", epoch, "step:", i, "loss:", loss.item())
         eval_acc = evaluate()
         if eval_acc > max_eval_acc:
@@ -45,6 +58,8 @@ def main():
             max_eval_acc = eval_acc
             print("save best model")
     torch.save(cnn.state_dict(), "./model.pkl")
+    plt.ioff()
+    plt.show()
     print("save last model")
 
 
