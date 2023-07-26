@@ -6,6 +6,7 @@ import torch
 import torch
 #检查cuda是否可以使用
 torch.cuda.is_available()
+print(torch.cuda.is_available())
 #查看当前gpu索引号
 torch.cuda.current_device()
 #查看当前cuda流

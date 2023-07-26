@@ -15,6 +15,6 @@ MAX_CAPTCHA = 4
 IMAGE_HEIGHT = 60
 IMAGE_WIDTH = 160
 
-TRAIN_DATASET_PATH = 'd:/dataset1' + os.path.sep + 'train'
-EVAL_DATASET_PATH = 'd:/dataset1' + os.path.sep + 'eval'
-PREDICT_DATASET_PATH = 'd:/dataset1' + os.path.sep + 'predict'
+TRAIN_DATASET_PATH = 'c:/data' + os.path.sep + 'train'
+EVAL_DATASET_PATH = 'c:/data' + os.path.sep + 'eval'
+PREDICT_DATASET_PATH = 'c:/data' + os.path.sep + 'predict'

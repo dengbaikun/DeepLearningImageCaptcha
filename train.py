@@ -19,7 +19,8 @@ def main():
     cnn.train()
 
     criterion = nn.MultiLabelSoftMarginLoss().cuda()
-    optimizer = torch.optim.Adam(cnn.parameters(), lr=learning_rate)
+    optimizer = torch.optim.Adam(cnn.parameters(), lr=learning_rate, weight_decay=5e-4)
+    # optimizer = torch.optim.SGD(cnn.parameters(), weight_decay=5e-4,lr=learning_rate)
     max_eval_acc = -1
 
     train_dataloader = dataset.get_train_data_loader()
@@ -28,7 +29,7 @@ def main():
     plt.ion()
     for epoch in range(num_epochs):
         if epoch == 0:
-            plt.pause(10)  # 启动时间，方便截屏
+            plt.pause(1)  # 启动时间，方便截屏
         for i, (images, labels) in enumerate(train_dataloader):
             if torch.cuda.is_available():
                 images = images.cuda()

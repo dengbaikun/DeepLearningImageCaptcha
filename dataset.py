@@ -28,6 +28,8 @@ class mydataset(Dataset):
 
 transform = transforms.Compose([
     # transforms.ColorJitter(),
+    # transforms.RandomCrop(32, padding=4),
+    # transforms.RandomHorizontalFlip(),
     transforms.Grayscale(),
     transforms.ToTensor(),
     # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
@@ -36,7 +38,7 @@ transform = transforms.Compose([
 
 def get_train_data_loader():
     dataset = mydataset(setting.TRAIN_DATASET_PATH, transform=transform)
-    return DataLoader(dataset, batch_size=512, shuffle=True)
+    return DataLoader(dataset, batch_size=64, shuffle=True)
 
 
 def get_eval_data_loader():
