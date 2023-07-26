@@ -13,6 +13,8 @@ learning_rate = 0.0001
 
 
 def main():
+    torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = True
     cnn = CNN()
     if torch.cuda.is_available():
         cnn = CNN().cuda()

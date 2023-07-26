@@ -38,7 +38,7 @@ transform = transforms.Compose([
 
 def get_train_data_loader():
     dataset = mydataset(setting.TRAIN_DATASET_PATH, transform=transform)
-    return DataLoader(dataset, batch_size=64, shuffle=True)
+    return DataLoader(dataset, batch_size=512, shuffle=True)
 
 
 def get_eval_data_loader():
