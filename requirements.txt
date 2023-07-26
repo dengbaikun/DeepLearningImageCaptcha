@@ -12,7 +12,10 @@ pyparsing==3.1.0
 python-dateutil==2.8.2
 requests==2.27.1
 six==1.16.0
-torch @ file:///D:/PycharmProjects/DeepLearningImageCaptcha/lib/torch-1.10.2%2Bcu113-cp36-cp36m-win_amd64.whl
-torchvision @ file:///D:/PycharmProjects/DeepLearningImageCaptcha/lib/torchvision-0.11.3%2Bcu113-cp36-cp36m-win_amd64.whl
+#GPU
+# torch @ file:///D:/PycharmProjects/DeepLearningImageCaptcha/lib/torch-1.10.2%2Bcu113-cp36-cp36m-win_amd64.whl
+# torchvision @ file:///D:/PycharmProjects/DeepLearningImageCaptcha/lib/torchvision-0.11.3%2Bcu113-cp36-cp36m-win_amd64.whl
+torch==1.10.2
+torchvision==0.11.3
 typing_extensions==4.1.1
 urllib3==1.26.16
