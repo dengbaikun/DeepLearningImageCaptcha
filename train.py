@@ -13,7 +13,9 @@ learning_rate = 0.0001
 
 
 def main():
-    cnn = CNN().cuda()
+    cnn = CNN()
+    if torch.cuda.is_available():
+        cnn = CNN().cuda()
     cnn.train()
 
     criterion = nn.MultiLabelSoftMarginLoss().cuda()
@@ -28,8 +30,9 @@ def main():
         if epoch == 0:
             plt.pause(10)  # 启动时间，方便截屏
         for i, (images, labels) in enumerate(train_dataloader):
-            images = images.cuda()
-            labels = labels.cuda()
+            if torch.cuda.is_available():
+                images = images.cuda()
+                labels = labels.cuda()
             images = Variable(images)
             labels = Variable(labels.float())
             predict_labels = cnn(images)

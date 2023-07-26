@@ -9,7 +9,9 @@ import encoding
 
 
 def main():
-    cnn = CNN().cuda()
+    cnn = CNN()
+    if torch.cuda.is_available():
+        cnn = CNN().cuda()
     cnn.eval()
     cnn.load_state_dict(torch.load('model.pkl'))
     print("load cnn net.")
@@ -19,8 +21,9 @@ def main():
     correct = 0
     total = 0
     for i, (images, labels) in enumerate(eval_dataloader):
-        images = images.cuda()
-        labels = labels.cuda()
+        if torch.cuda.is_available():
+            images = images.cuda()
+            labels = labels.cuda()
         image = images
         vimage = Variable(image)
         predict_label = cnn(vimage)
